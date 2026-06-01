@@ -4,31 +4,44 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Jewce</title>
-  <meta name="description" content="Jewce.com — hello world.">
+  <meta name="description" content="Jewce.com">
   <style>
     :root { color-scheme: light dark; }
     html, body { height: 100%; margin: 0; }
     body {
-      display: grid;
-      place-items: center;
+      min-height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.25rem;
+      padding: 2rem 1rem;
+      box-sizing: border-box;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       background: radial-gradient(circle at 50% 30%, #1b2735 0%, #090a0f 100%);
       color: #f4f4f5;
       text-align: center;
     }
-    main { padding: 2rem; }
     h1 {
-      font-size: clamp(2.5rem, 8vw, 5rem);
-      margin: 0 0 0.5rem;
+      font-size: clamp(2rem, 6vw, 3.5rem);
+      margin: 0;
       letter-spacing: -0.02em;
     }
-    p { font-size: clamp(1rem, 3vw, 1.25rem); opacity: 0.7; margin: 0; }
+    video {
+      max-height: 78vh;
+      max-width: min(100%, 440px);
+      height: auto;
+      border-radius: 16px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.55);
+      background: #000;
+    }
+    p { font-size: 1rem; opacity: 0.6; margin: 0; }
   </style>
 </head>
 <body>
-  <main>
-    <h1>Hello, world.</h1>
-    <p>jewce.com is live.</p>
-  </main>
+  <h1>Hello, world.</h1>
+  <video src="jewce.mp4" poster="poster.jpg"
+         controls autoplay muted loop playsinline preload="metadata"></video>
+  <p>jewce.com</p>
 </body>
 </html>
