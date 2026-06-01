@@ -3,45 +3,131 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Jewce</title>
-  <meta name="description" content="Jewce.com">
+  <title>The Jewce</title>
+  <meta name="description" content="The Jewce — 100% prime, now with beats. 🥩🎵">
+  <link rel="canonical" href="https://jewce.com/">
+  <meta name="theme-color" content="#ff2e88">
+
+  <!-- Open Graph: iMessage, Facebook, LinkedIn, etc. -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="The Jewce">
+  <meta property="og:url" content="https://jewce.com/">
+  <meta property="og:title" content="The Jewce">
+  <meta property="og:description" content="100% prime, now with beats. 🥩🎵">
+  <meta property="og:image" content="https://jewce.com/og-image.jpg">
+  <meta property="og:image:secure_url" content="https://jewce.com/og-image.jpg">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="THE JEWCE — sizzling prime steak">
+
+  <!-- Twitter / X large card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="The Jewce">
+  <meta name="twitter:description" content="100% prime, now with beats. 🥩🎵">
+  <meta name="twitter:image" content="https://jewce.com/og-image.jpg">
+  <meta name="twitter:image:alt" content="THE JEWCE — sizzling prime steak">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Bungee+Shade&family=Permanent+Marker&display=swap" rel="stylesheet">
   <style>
-    :root { color-scheme: light dark; }
-    html, body { height: 100%; margin: 0; }
+    :root { color-scheme: dark; }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; }
     body {
-      min-height: 100%;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 1.25rem;
-      padding: 2rem 1rem;
-      box-sizing: border-box;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background: radial-gradient(circle at 50% 30%, #1b2735 0%, #090a0f 100%);
-      color: #f4f4f5;
+      gap: 1.5rem;
+      padding: 3rem 1rem 4rem;
+      overflow-x: hidden;
       text-align: center;
+      background-color: #2a0d0d;
+      background-image:
+        linear-gradient(rgba(38,0,12,0.40), rgba(38,0,12,0.40)),
+        url("steak.jpg");
+      background-repeat: no-repeat, repeat;
+      background-size: cover, 150px 150px;
+      background-attachment: fixed, fixed;
+      font-family: "Permanent Marker", cursive;
     }
+
     h1 {
-      font-size: clamp(2rem, 6vw, 3.5rem);
       margin: 0;
-      letter-spacing: -0.02em;
+      font-family: "Bangers", cursive;
+      font-size: clamp(3.5rem, 16vw, 9rem);
+      line-height: 0.9;
+      letter-spacing: 3px;
+      color: #ffe14d;
+      transform: rotate(-3deg);
+      text-shadow:
+         3px  3px 0 #ff2e88,
+         6px  6px 0 #00e0d0,
+         9px  9px 0 #111,
+        12px 12px 0 rgba(0,0,0,0.35);
+      animation: wobble 2.6s ease-in-out infinite;
     }
+    @keyframes wobble {
+      0%,100% { transform: rotate(-3deg) translateY(0); }
+      50%     { transform: rotate(2deg)  translateY(-6px); }
+    }
+
+    .tag {
+      margin: 0;
+      font-family: "Bungee Shade", cursive;
+      font-size: clamp(1rem, 4.5vw, 1.9rem);
+      color: #fff;
+      background: #ff2e88;
+      padding: 0.35em 0.8em;
+      border: 4px solid #111;
+      box-shadow: 6px 6px 0 #111;
+      transform: rotate(1.5deg);
+    }
+
     video {
-      max-height: 78vh;
-      max-width: min(100%, 440px);
+      width: min(86vw, 380px);
       height: auto;
-      border-radius: 16px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.55);
+      display: block;
+      border: 12px solid #111;
+      border-radius: 4px;
       background: #000;
+      transform: rotate(-2deg);
+      box-shadow:
+        14px 14px 0 0 #ffe14d,
+        28px 28px 0 0 #ff2e88,
+        42px 42px 0 0 #111;
     }
-    p { font-size: 1rem; opacity: 0.6; margin: 0; }
+
+    .hint {
+      margin: 0.6rem 0 0;
+      font-family: "Permanent Marker", cursive;
+      font-size: clamp(1rem, 4vw, 1.4rem);
+      color: #ffe14d;
+      text-shadow: 2px 2px 0 #111;
+      animation: blink 1.4s steps(1) infinite;
+    }
+    @keyframes blink { 50% { opacity: 0.35; } }
+
+    .foot {
+      font-family: "Bangers", cursive;
+      font-size: clamp(1.2rem, 5vw, 2rem);
+      letter-spacing: 2px;
+      color: #fff;
+      text-shadow: 3px 3px 0 #111;
+    }
   </style>
 </head>
 <body>
-  <h1>Hello, world.</h1>
+  <h1>The&nbsp;Jewce</h1>
+  <p class="tag">🥩 100% PRIME &nbsp;•&nbsp; NOW WITH BEATS 🎵</p>
+
   <video src="jewce.mp4" poster="poster.jpg"
          controls autoplay muted loop playsinline preload="metadata"></video>
-  <p>jewce.com</p>
+  <p class="hint">🔊 tap for sound</p>
+
+  <p class="foot">jewce.com</p>
 </body>
 </html>
