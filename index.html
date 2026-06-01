@@ -101,15 +101,33 @@
         42px 42px 0 0 #111;
     }
 
-    .hint {
-      margin: 0.6rem 0 0;
-      font-family: "Permanent Marker", cursive;
-      font-size: clamp(1rem, 4vw, 1.4rem);
-      color: #ffe14d;
-      text-shadow: 2px 2px 0 #111;
-      animation: blink 1.4s steps(1) infinite;
+    .player { position: relative; display: inline-block; line-height: 0; }
+
+    .play-btn {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(-3deg);
+      font-family: "Bangers", cursive;
+      font-size: clamp(1.5rem, 7vw, 2.6rem);
+      letter-spacing: 2px;
+      color: #fff;
+      background: #ff2e88;
+      padding: 0.45em 0.95em;
+      border: 5px solid #111;
+      border-radius: 8px;
+      box-shadow: 8px 8px 0 #111;
+      cursor: pointer;
+      white-space: nowrap;
+      z-index: 2;
+      animation: pulse 1.3s ease-in-out infinite;
     }
-    @keyframes blink { 50% { opacity: 0.35; } }
+    .play-btn:hover { background: #ff4f9c; }
+    .play-btn:active { box-shadow: 3px 3px 0 #111; }
+    @keyframes pulse {
+      0%,100% { transform: translate(-50%, -50%) rotate(-3deg) scale(1); }
+      50%     { transform: translate(-50%, -50%) rotate(-3deg) scale(1.07); }
+    }
 
     .foot {
       font-family: "Bangers", cursive;
@@ -122,38 +140,35 @@
 </head>
 <body>
   <h1>The&nbsp;Jewce</h1>
-  <p class="tag">🥩 100% PRIME &nbsp;•&nbsp; NOW WITH BEATS 🎵</p>
+  <p class="tag">🥩 100% PRIME 🥩</p>
 
-  <video id="jewce-video" src="jewce.mp4" poster="poster.jpg"
-         controls autoplay muted loop playsinline preload="metadata"></video>
-  <p class="hint" id="sound-hint">🔊 tap anywhere for sound</p>
+  <div class="player">
+    <video id="jewce-video" src="jewce.mp4" poster="poster.jpg"
+           controls loop playsinline preload="metadata"></video>
+    <button class="play-btn" id="play-btn" type="button">▶ PLAY VIDEO</button>
+  </div>
 
   <p class="foot">jewce.com</p>
 
   <script>
-    // Browsers only allow autoplay when muted. So we start muted, then unmute
-    // the instant the visitor interacts (tap / click / scroll / key) — the
-    // first user gesture lets us turn the sound on with the song playing.
+    // iOS won't play audio without a user gesture. Starting playback from the
+    // "Play Video" button click is that gesture — so the video plays WITH sound.
     (function () {
       var v = document.getElementById('jewce-video');
-      var hint = document.getElementById('sound-hint');
-      var events = ['pointerdown', 'touchstart', 'click', 'keydown', 'scroll'];
-      function unmute() {
-        if (!v) return;
+      var btn = document.getElementById('play-btn');
+      if (!v || !btn) return;
+      btn.addEventListener('click', function () {
         v.muted = false;
         v.volume = 1;
         var p = v.play();
         if (p && p.catch) p.catch(function () {});
-        if (hint) hint.style.display = 'none';
-        events.forEach(function (e) { window.removeEventListener(e, unmute); });
-      }
-      events.forEach(function (e) {
-        window.addEventListener(e, unmute, { once: true, passive: true });
+        btn.style.display = 'none';
       });
-      // If the visitor unmutes via the player's own controls, drop the hint too.
-      if (v) v.addEventListener('volumechange', function () {
-        if (!v.muted && hint) hint.style.display = 'none';
+      // If the visitor pauses with the native controls, bring the button back.
+      v.addEventListener('pause', function () {
+        if (!v.ended) btn.style.display = '';
       });
+      v.addEventListener('play', function () { btn.style.display = 'none'; });
     })();
   </script>
 </body>
