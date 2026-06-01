@@ -47,10 +47,10 @@
       text-align: center;
       background-color: #2a0d0d;
       background-image:
-        linear-gradient(rgba(38,0,12,0.40), rgba(38,0,12,0.40)),
-        url("steak.jpg");
+        linear-gradient(rgba(34,0,10,0.34), rgba(34,0,10,0.34)),
+        url("steakbg.jpg");
       background-repeat: no-repeat, repeat;
-      background-size: cover, 150px 150px;
+      background-size: cover, 600px 600px;
       background-attachment: fixed, fixed;
       font-family: "Permanent Marker", cursive;
     }
@@ -124,10 +124,37 @@
   <h1>The&nbsp;Jewce</h1>
   <p class="tag">🥩 100% PRIME &nbsp;•&nbsp; NOW WITH BEATS 🎵</p>
 
-  <video src="jewce.mp4" poster="poster.jpg"
+  <video id="jewce-video" src="jewce.mp4" poster="poster.jpg"
          controls autoplay muted loop playsinline preload="metadata"></video>
-  <p class="hint">🔊 tap for sound</p>
+  <p class="hint" id="sound-hint">🔊 tap anywhere for sound</p>
 
   <p class="foot">jewce.com</p>
+
+  <script>
+    // Browsers only allow autoplay when muted. So we start muted, then unmute
+    // the instant the visitor interacts (tap / click / scroll / key) — the
+    // first user gesture lets us turn the sound on with the song playing.
+    (function () {
+      var v = document.getElementById('jewce-video');
+      var hint = document.getElementById('sound-hint');
+      var events = ['pointerdown', 'touchstart', 'click', 'keydown', 'scroll'];
+      function unmute() {
+        if (!v) return;
+        v.muted = false;
+        v.volume = 1;
+        var p = v.play();
+        if (p && p.catch) p.catch(function () {});
+        if (hint) hint.style.display = 'none';
+        events.forEach(function (e) { window.removeEventListener(e, unmute); });
+      }
+      events.forEach(function (e) {
+        window.addEventListener(e, unmute, { once: true, passive: true });
+      });
+      // If the visitor unmutes via the player's own controls, drop the hint too.
+      if (v) v.addEventListener('volumechange', function () {
+        if (!v.muted && hint) hint.style.display = 'none';
+      });
+    })();
+  </script>
 </body>
 </html>
